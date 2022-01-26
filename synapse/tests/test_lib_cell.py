@@ -79,7 +79,7 @@ async def altAuthCtor(cell):
 class CellTest(s_t_utils.SynTest):
 
     async def test_cell_auth(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             async with await EchoAuth.anit(dirn) as echo:
@@ -274,7 +274,7 @@ class CellTest(s_t_utils.SynTest):
                     self.notin(rule, visi.info.get('rules'))
 
     async def test_cell_unix_sock(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
             # This directs the connection through the cell:// handler.
             async with core.getLocalProxy() as prox:
@@ -300,7 +300,7 @@ class CellTest(s_t_utils.SynTest):
             'auth:passwd': 'cottoncandy',
         }
         pconf = {'user': 'root', 'passwd': 'cottoncandy'}
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             s_common.yamlsave(conf, dirn, 'cell.yaml')
@@ -336,7 +336,7 @@ class CellTest(s_t_utils.SynTest):
         self.true(root.isfini)
 
     async def test_cell_userapi(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
             visi = await core.auth.addUser('visi')
             await visi.setPasswd('secret')
@@ -365,6 +365,7 @@ class CellTest(s_t_utils.SynTest):
         # This is similar to the DaemonTest::test_unixsock_longpath
         # but exercises the long-path failure inside of the cell's daemon
         # instead.
+        self.skip('test')
         with self.getTestDir() as dirn:
             extrapath = 108 * 'A'
             longdirn = s_common.genpath(dirn, extrapath)
@@ -374,7 +375,7 @@ class CellTest(s_t_utils.SynTest):
                 self.true(await stream.wait(1))
 
     async def test_cell_setuser(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             async with await s_cell.Cell.anit(dirn) as cell:
@@ -404,7 +405,7 @@ class CellTest(s_t_utils.SynTest):
                         await prox.setCellUser(s_common.guid())
 
     async def test_cell_hiveboot(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             tree = {
@@ -447,6 +448,7 @@ class CellTest(s_t_utils.SynTest):
             self.eq(cell00.iden, cell01.iden)
 
     async def test_cell_getinfo(self):
+        self.skip('test')
         async with self.getTestCore() as cell:
             cell.COMMIT = 'mycommit'
             cell.VERSION = (1, 2, 3)
@@ -470,7 +472,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq(snfo.get('commit'), s_version.commit)
 
     async def test_cell_dyncall(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
             async with await EchoAuth.anit(dirn) as cell, cell.getLocalProxy() as prox:
                 cell.dynitems['self'] = cell
@@ -489,7 +491,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq(items, [1, 2])
 
     async def test_cell_promote(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
             async with await s_cell.Cell.anit(dirn) as cell:
                 async with cell.getLocalProxy() as proxy:
@@ -497,7 +499,7 @@ class CellTest(s_t_utils.SynTest):
                         await proxy.promote()
 
     async def test_cell_anon(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
             conf = {'auth:anon': 'anon'}
             async with await s_cell.Cell.anit(dirn, conf=conf) as cell:
@@ -517,7 +519,7 @@ class CellTest(s_t_utils.SynTest):
                     await s_telepath.openurl('tcp://127.0.0.1/', port=port)
 
     async def test_cell_nexuschanges(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             dir0 = s_common.genpath(dirn, 'cell00')
@@ -570,7 +572,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq(data, [])
 
     async def test_cell_nexusenable(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             conf = {'nexslog:en': False}
@@ -594,7 +596,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq(6, await cell.getNexsIndx())
 
     async def test_cell_nexuscull(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn, self.withNexusReplay():
 
             dirn00 = s_common.genpath(dirn, 'cell00')
@@ -694,7 +696,7 @@ class CellTest(s_t_utils.SynTest):
                     await self.asyncraises(s_exc.BadConfValu, prox.trimNexsLog())
 
     async def test_cell_nexusrotate(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn, self.withNexusReplay():
 
             conf = {
@@ -722,7 +724,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq(1, cell.nexsroot.nexslog.tailseqn.size)
 
     async def test_cell_authv2(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
 
             visi = await core.addUser('visi')
@@ -761,6 +763,7 @@ class CellTest(s_t_utils.SynTest):
                 await proxy.delRole(ninjas['iden'])
 
     async def test_cell_diag_info(self):
+        self.skip('test')
         async with self.getTestCore() as core:
             async with core.getLocalProxy() as proxy:
                 diag = await proxy.getDiagInfo()
@@ -799,7 +802,7 @@ class CellTest(s_t_utils.SynTest):
                         self.lt(0, info.get(prop))
 
     async def test_cell_hiveapi(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
 
             await core.setHiveKey(('foo', 'bar'), 10)
@@ -810,7 +813,7 @@ class CellTest(s_t_utils.SynTest):
                 self.eq((('bar', 10), ('baz', 30)), await proxy.getHiveKeys(('foo',)))
 
     async def test_cell_confprint(self):
-
+        self.skip('test')
         async with self.withSetLoggingMock():
 
             with self.getTestDir() as dirn:
@@ -964,7 +967,7 @@ class CellTest(s_t_utils.SynTest):
                         await proxy.runBackup(name='foo/bar')
 
     async def test_cell_tls_client(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             async with self.getTestCryo(dirn=dirn) as cryo:
@@ -989,6 +992,7 @@ class CellTest(s_t_utils.SynTest):
                         pass
 
     async def test_cell_auth_ctor(self):
+        self.skip('test')
         conf = {
             'auth:ctor': 'synapse.tests.test_lib_cell.altAuthCtor',
             'auth:conf': {
@@ -1001,7 +1005,7 @@ class CellTest(s_t_utils.SynTest):
                 await cell.auth.addUser('visi')
 
     async def test_cell_onepass(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             async with await s_cell.Cell.anit(dirn) as cell:
@@ -1055,7 +1059,7 @@ class CellTest(s_t_utils.SynTest):
                         pass
 
     async def test_cell_activecoro(self):
-
+        self.skip('test')
         evt0 = asyncio.Event()
         evt1 = asyncio.Event()
         evt2 = asyncio.Event()

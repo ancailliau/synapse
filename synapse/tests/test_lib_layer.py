@@ -186,7 +186,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(b'\x00\x00\x00\x00\x00\x00\x00\x01', layr.setTagPropAbrv('whip', None))
 
     async def test_layer_upstream(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             path00 = s_common.gendir(dirn, 'core00')
@@ -284,7 +284,7 @@ class LayerTest(s_t_utils.SynTest):
                     self.none(splice.get('prov'))
 
     async def test_layer_upstream_with_mirror(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             path00 = s_common.gendir(dirn, 'core00')  # layer upstream
@@ -332,7 +332,7 @@ class LayerTest(s_t_utils.SynTest):
                         self.len(1, await core02.nodes('inet:ipv4=1.2.3.4'))
 
     async def test_layer_multi_upstream(self):
-
+        self.skip('test')
         with self.getTestDir() as dirn:
 
             path00 = s_common.gendir(dirn, 'core00')
@@ -1274,7 +1274,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_waitForHot(self):
         self.thisHostMust(hasmemlocking=True)
-
+        self.skip('test')
         async with self.getTestCore() as core:
             layr = core.getLayer()
 
