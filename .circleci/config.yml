@@ -44,6 +44,8 @@ commands:
             . venv/bin/activate
             python3 -m pip install -U wheel pip
             python3 -m pip install -U -r requirements_dev.txt
+            pip install git+https://github.com/nedbat/coveragepy@nedbat/fix-1312
+            pip freeze
 
       - run:
           name: install synapse
