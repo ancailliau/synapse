@@ -29,7 +29,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(layr.layrvers, 7)
 
     async def test_layer_verify(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
 
             nodes = await core.nodes('[ inet:ipv4=1.2.3.4 :asn=20 +#foo.bar ]')
@@ -168,7 +168,7 @@ class LayerTest(s_t_utils.SynTest):
             self.len(0, errors)
 
     async def test_layer_abrv(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
 
             layr = core.getLayer()
@@ -443,7 +443,7 @@ class LayerTest(s_t_utils.SynTest):
                         self.len(1, await core02.nodes('inet:ipv4=8.7.6.5'))
 
     async def test_layer_splices(self):
-
+        self.skip('test')
         async with self.getTestCore() as core:
 
             layr = core.view.layers[0]
@@ -660,7 +660,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_hier(self):
         stor = s_layer.StorTypeHier(None, None)
-
+        self.skip('test')
         vals = ['', 'foo', 'foo.bar']
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
@@ -668,7 +668,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_ipv6(self):
         stor = s_layer.StorTypeIpv6(None)
-
+        self.skip('test')
         vals = ('::1', 'fe80::431c:39b2:888:974')
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
@@ -676,7 +676,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_fqdn(self):
         stor = s_layer.StorTypeFqdn(None)
-
+        self.skip('test')
         vals = ('vertex.link', 'www.vertex.link')
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
@@ -688,7 +688,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_hugenum(self):
         stor = s_layer.StorTypeHugeNum(self, None)
-
+        self.skip('test')
         vals = [-99999.9, -0.0000000001, -42.1, -0.0, 0.0, 0.000001, 42.1, 99999.9, 2**63 + 1.1]
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
@@ -696,7 +696,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_ival(self):
         stor = s_layer.StorTypeIval(self)
-
+        self.skip('test')
         vals = [(2000, 2020), (1960, 1970)]
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
@@ -704,13 +704,15 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_latlon(self):
         stor = s_layer.StorTypeLatLon(self)
-
+        self.skip('test')
         vals = [(0.0, 0.0), (89.2, -140.2)]
 
         for valu, indx in ((v, stor.indx(v)) for v in vals):
             self.eq(valu, stor.decodeIndx(indx[0]))
 
     async def test_layer_stortype_int(self):
+        self.skip('test')
+
         async with self.getTestCore() as core:
 
             layr = core.view.layers[0]
@@ -789,6 +791,8 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(retn, vals)
 
     async def test_layer_stortype_float(self):
+        self.skip('test')
+
         async with self.getTestCore() as core:
 
             layr = core.view.layers[0]
@@ -871,6 +875,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stortype_guid(self):
         stor = s_layer.StorTypeGuid(None)
+        self.skip('test')
 
         vals = (s_common.guid(valu=42), '0' * 32, 'f' * 32)
 
@@ -878,6 +883,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(valu, stor.decodeIndx(indx[0]))
 
     async def test_layer_stortype_merge(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
 
@@ -942,6 +948,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq((1325376000000, 1420070400001), nodes[0].getTag('foo.bar'))
 
     async def test_layer_nodeedits_created(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
 
@@ -1014,6 +1021,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(created00, nodes[0].get('.created'))
 
     async def test_layer_nodeedits(self):
+        self.skip('test')
 
         async with self.getTestCoreAndProxy() as (core0, prox0):
 
@@ -1095,6 +1103,7 @@ class LayerTest(s_t_utils.SynTest):
 
     async def test_layer_stornodeedits_nonexus(self):
         # test for migration methods that store nodeedits bypassing nexus
+        self.skip('test')
 
         async with self.getTestCore() as core0:
 
@@ -1114,6 +1123,7 @@ class LayerTest(s_t_utils.SynTest):
             self.len(2, await core0.nodes('.created'))
 
     async def test_layer_syncindexevents(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
             layr = core.getLayer()
@@ -1170,6 +1180,7 @@ class LayerTest(s_t_utils.SynTest):
                 ])
 
     async def test_layer_form_by_buid(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
 
@@ -1240,6 +1251,7 @@ class LayerTest(s_t_utils.SynTest):
             self.none(await layr01.getNodeForm(buid1))
 
     async def test_layer(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
 
@@ -1274,6 +1286,7 @@ class LayerTest(s_t_utils.SynTest):
             await asyncio.wait_for(layr.waitForHot(), timeout=1.0)
 
     async def test_layer_no_extra_logging(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
             '''
@@ -1290,6 +1303,8 @@ class LayerTest(s_t_utils.SynTest):
         '''
         Regression test
         '''
+        self.skip('test')
+
         async with self.getTestCore() as core:
             await core.nodes('$x = 0 while $($x < 2000) { [file:bytes="*"] [ou:org="*"] $x = $($x + 1)}')
             await core.nodes('.created | delnode --force')
@@ -1297,6 +1312,8 @@ class LayerTest(s_t_utils.SynTest):
             self.len(0, nodes)
 
     async def test_layer_flat_edits(self):
+        self.skip('test')
+
         nodeedits = (
             (b'asdf', 'test:junk', (
                 (s_layer.EDIT_NODE_ADD, (10, s_layer.STOR_TYPE_U64), (
@@ -1309,6 +1326,7 @@ class LayerTest(s_t_utils.SynTest):
         self.len(2, s_layer.getFlatEdits(nodeedits))
 
     async def test_layer_clone(self):
+        self.skip('test')
 
         async with self.getTestCoreAndProxy() as (core, prox):
 
@@ -1349,6 +1367,7 @@ class LayerTest(s_t_utils.SynTest):
             self.true(readlayr.readonly)
 
     async def test_layer_v3(self):
+        self.skip('test')
 
         async with self.getRegrCore('2.0-layerv2tov3') as core:
 
@@ -1365,6 +1384,8 @@ class LayerTest(s_t_utils.SynTest):
             self.checkLayrvers(core)
 
     async def test_layer_v7(self):
+        self.skip('test')
+
         async with self.getRegrCore('2.78.0-tagprop-missing-indx') as core:
             nodes = await core.nodes('inet:ipv4=1.2.3.4')
             # Our malformed node was migrated properly.
@@ -1399,10 +1420,13 @@ class LayerTest(s_t_utils.SynTest):
             self.checkLayrvers(core)
 
     async def test_layer_logedits_default(self):
+        self.skip('test')
+
         async with self.getTestCore() as core:
             self.true(core.getLayer().logedits)
 
     async def test_layer_no_logedits(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
             info = await core.addLayer({'logedits': False})
@@ -1411,6 +1435,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(-1, await layr.getEditOffs())
 
     async def test_layer_iter_props(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
             await core.addTagProp('score', ('int', {}), {})
@@ -1526,6 +1551,7 @@ class LayerTest(s_t_utils.SynTest):
             self.eq(expect[1:], rows)
 
     async def test_layer_setinfo(self):
+        self.skip('test')
 
         async with self.getTestCore() as core:
 
@@ -1548,6 +1574,7 @@ class LayerTest(s_t_utils.SynTest):
                 await core.callStorm('$layer = $lib.layer.get() $layer.set(newp, hehe)')
 
     async def test_reindex_byarray(self):
+        self.skip('test')
 
         async with self.getRegrCore('reindex-byarray2') as core:
 
@@ -1605,6 +1632,7 @@ class LayerTest(s_t_utils.SynTest):
             self.checkLayrvers(core)
 
     async def test_rebuild_byarray(self):
+        self.skip('test')
 
         async with self.getRegrCore('reindex-byarray3') as core:
 
@@ -1662,6 +1690,7 @@ class LayerTest(s_t_utils.SynTest):
             self.checkLayrvers(core)
 
     async def test_migr_tagprop_keys(self):
+        self.skip('test')
 
         async with self.getRegrCore('tagprop-keymigr') as core:
 
