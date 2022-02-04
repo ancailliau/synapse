@@ -221,6 +221,39 @@ class JsonStor(s_base.Base):
         self.dirty[buid] = item
         return True
 
+    async def setPathObjProps(self, path, props):
+        if not props:
+            return False
+
+        buid = self._pathToBuid(path)
+        if buid is None:
+            return False
+
+        item = self._getBuidItem(buid)
+        if item is None:
+            return False
+
+        base_step = item
+        for prop, valu in props.items():
+            step = base_step
+            names = self._pathToTupl(prop)
+            for name in names[:-1]:
+                down = step.get(name)
+
+                if down is None:
+                    down = step[name] = {}
+
+                step = down
+
+            name = names[-1]
+            if step.get(name, s_common.novalu) == valu:
+                continue
+
+            step[name] = valu
+            self.dirty[buid] = item
+
+        return True
+
     async def delPathObjProp(self, path, prop):
 
         buid = self._pathToBuid(path)
@@ -363,6 +396,11 @@ class JsonStorApi(s_cell.CellApi):
         await self._reqUserAllowed(('json', 'set', *path))
         return await self.cell.setPathObjProp(path, prop, valu)
 
+    async def setPathObjProps(self, path, props):
+        path = self.cell.jsonstor._pathToTupl(path)
+        await self._reqUserAllowed(('json', 'set', *path))
+        return await self.cell.setPathObjProps(path, props)
+
     async def setPathLink(self, srcpath, dstpath):
         srcpath = self.cell.jsonstor._pathToTupl(srcpath)
         dstpath = self.cell.jsonstor._pathToTupl(dstpath)
@@ -482,6 +520,10 @@ class JsonStorCell(s_cell.Cell):
     @s_nexus.Pusher.onPushAuto('json:set:prop')
     async def setPathObjProp(self, path, prop, valu):
         return await self.jsonstor.setPathObjProp(path, prop, valu)
+
+    @s_nexus.Pusher.onPushAuto('json:set:props')
+    async def setPathObjProps(self, path, props):
+        return await self.jsonstor.setPathObjProps(path, props)
 
     @s_nexus.Pusher.onPushAuto('json:link')
     async def setPathLink(self, srcpath, dstpath):

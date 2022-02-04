@@ -84,6 +84,13 @@ class JsonStorTest(s_test.SynTest):
                     with self.raises(s_exc.NoSuchPath):
                         await prox.setPathLink('lol/lol', 'hehe/haha')
 
+                    await prox.setPathObj('some/path', {'key': 'valu'})
+                    await prox.setPathObjProps('some/path', {'key': 'valu2', 'foo': 'bar', 'duck/pig': 'ok'})
+                    self.eq(await prox.getPathObj('some/path'),
+                            {'key': 'valu2', 'foo': 'bar', 'duck': {'pig': 'ok'}})
+                    self.false(await prox.setPathObjProps('some/path', {}))
+                    self.false(await prox.setPathObjProps('some/newp', {'key': 'valu'}))
+
                     self.true(await prox.addQueue('hehe', {}))
                     self.false(await prox.addQueue('hehe', {}))
 
